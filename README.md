@@ -58,7 +58,7 @@ Please bear in mind that this will take longer the first time you do it, but onc
 
 <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/rendervalue.png">   
 
-- In the same tab, we must also set the render engine to 'cycles'. This enables blender to do its shaded-relief magic. If you have a powerful graphics card I reccommend chaning the 'device' to 'GPU compute' - that way renders will be much faster.
+- In the same tab, we must also set the render engine to 'cycles' and set 'feature set' to experimental. This enables blender to do its shaded-relief magic. If you have a powerful graphics card I reccommend chaning the 'device' to 'GPU compute' - that way renders will be much faster.
 
 #### Lighting settings 
 
