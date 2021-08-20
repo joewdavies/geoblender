@@ -51,10 +51,12 @@ Please bear in mind that this will take longer the first time you do it, but onc
 - Also notice that I set the % of the scene dimensions to 20%. This just means that renders will be a lot quicker whilst we are tinkering with different settings until we are happy. Once everything is ready we can crank it up to 100% (or for bigger DEMs whatever our computer is capable of!) and the render will take longer but will produce an image with a higher resolution.  
 
 -we also need to make sure that the aspect ratio of our scene matches our DEM image. To do this, we can just set the scale of our plane to match the dimensions of our DEM. In this example my DEM is 2348 x 2604 so I will set the plane X scale to 2.348 and the Y scale to 2.604. 
+
 <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/aspect.png">   
 
 - Just like this % value of the scene dimensions, we can increase and decrease the 'render' value in the 'render properties' tab to determine how many passes blender takes for each pixel (higher = more detailed, lower = less detailed)  
-- <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/rendervalue.png">   
+
+<img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/rendervalue.png">   
 
 - In the same tab, we must also set the render engine to 'cycles'. This enables blender to do its shaded-relief magic. If you have a powerful graphics card I reccommend chaning the 'device' to 'GPU compute' - that way renders will be much faster.
 
