@@ -40,13 +40,21 @@ Please bear in mind that this will take longer the first time you do it, but onc
 
 - First delete the cube that is loaded by default (left click then delete key)
 
-- Then we need to add a plane. This is done by selecting add > mesh > plane <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/addplane.png"> 
+- Then we need to add a plane. This is done by selecting add > mesh > plane 
 
-- Set the dimensions of the scene according to the dimensions of our DEM image (in this case, the rendered DEM is 2348 x 2604 so I will set the X in scene dimensions to 2348 and the Y to 2604) <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/scenedimensions.png"> Also notice that I set the % of the scene dimensions to 20%. This just means that renders will be a lot quicker whilst we are tinkering with different settings until we are happy. Once everything is ready we can crank it up to 100% (or for bigger DEMs whatever our computer is capable of!) and the render will take longer but will produce an image with a higher resolution.  
+<img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/addplane.png"> 
 
--we also need to make sure that the aspect ratio of our scene matches our DEM image. To do this, we can just set the scale of our plane to match the dimensions of our DEM. In this example my DEM is 2348 x 2604 so I will set the plane X scale to 2.348 and the Y scale to 2.604. <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/aspect.png">   
+- Set the dimensions of the scene according to the dimensions of our DEM image (in this case, the rendered DEM is 2348 x 2604 so I will set the X in scene dimensions to 2348 and the Y to 2604).
 
-- Just like this % value of the scene dimensions, we can increase and decrease the 'render' value in the 'render properties' tab to determine how many passes blender takes for each pixel (higher = more detailed, lower = less detailed)  <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/rendervalue.png">   
+<img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/scenedimensions.png"> 
+
+- Also notice that I set the % of the scene dimensions to 20%. This just means that renders will be a lot quicker whilst we are tinkering with different settings until we are happy. Once everything is ready we can crank it up to 100% (or for bigger DEMs whatever our computer is capable of!) and the render will take longer but will produce an image with a higher resolution.  
+
+-we also need to make sure that the aspect ratio of our scene matches our DEM image. To do this, we can just set the scale of our plane to match the dimensions of our DEM. In this example my DEM is 2348 x 2604 so I will set the plane X scale to 2.348 and the Y scale to 2.604. 
+<img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/aspect.png">   
+
+- Just like this % value of the scene dimensions, we can increase and decrease the 'render' value in the 'render properties' tab to determine how many passes blender takes for each pixel (higher = more detailed, lower = less detailed)  
+- <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/rendervalue.png">   
 
 - In the same tab, we must also set the render engine to 'cycles'. This enables blender to do its shaded-relief magic. If you have a powerful graphics card I reccommend chaning the 'device' to 'GPU compute' - that way renders will be much faster.
 
@@ -66,10 +74,13 @@ Finally, we need to set our camera to how we want it. To do this, select the cam
 - Then set the rotation X Y and Z to 0
 
 If the camera is too zoomed-in, adjust the focal length property (when using a perspective camera) or the orthographic scale (when using an orthographic camera). You can also adjust the Z position of the camera. For playing around with different camera angles I suggest switching to the '3D viewport' editor type and moving the camera by hand (see screenshot below). 
+
 <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/camera.png"> 
 
  ## Step 3 : Plug the DEM into the plane <a name="3"></a>
- - In order for the plane to use our DEM for elevation, we need to add a new material to our plane. To do this, select the plane in the object collections panel (top right), then change the editor mode to shader editor  <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/editortype.png"> 
+ - In order for the plane to use our DEM for elevation, we need to add a new material to our plane. To do this, select the plane in the object collections panel (top right), then change the editor mode to shader editor  
+ 
+<img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/editortype.png"> 
 
  - Once in shader editor click 'new material' which should add two new nodes: a principled BSDF and a material output
 
@@ -84,6 +95,7 @@ If the camera is too zoomed-in, adjust the focal length property (when using a p
  ## Step 4 : Add modifier <a name="4"></a>
 
  If you render the image now (render > render image or F12) you should get something like this:
+ 
 <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/render1.png"> 
 
 Which is not what we want (blender is not deforming the plane 'in 3D' it is just showing a 2D hillshade).
@@ -93,6 +105,7 @@ To change this lets add a modifier:
 - click the blue spanner icon to open modifier properties then click add modifier > subdivision surface. Now select 'simple' as the type of subdivision algorithm then tick 'adaptive subdivision'.
 
 Now press F12 to render again and you should ned up with something like this:
+
 <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/render2.png"> 
 
 
