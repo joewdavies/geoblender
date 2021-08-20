@@ -50,7 +50,7 @@ Please bear in mind that this will take longer the first time you do it, but onc
 
 - Also notice that I set the % of the scene dimensions to 20%. This just means that renders will be a lot quicker whilst we are tinkering with different settings until we are happy. Once everything is ready we can crank it up to 100% (or for bigger DEMs whatever our computer is capable of!) and the render will take longer but will produce an image with a higher resolution.  
 
--we also need to make sure that the aspect ratio of our scene matches our DEM image. To do this, we can just set the scale of our plane to match the dimensions of our DEM. In this example my DEM is 2348 x 2604 so I will set the plane X scale to 2.348 and the Y scale to 2.604. 
+- We also need to make sure that the aspect ratio of our scene matches our DEM image. To do this, we can just set the scale of our plane to match the dimensions of our DEM. In this example my DEM is 2348 x 2604 so I will set the plane X scale to 2.348 and the Y scale to 2.604. 
 
 <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/aspect.png">   
 
