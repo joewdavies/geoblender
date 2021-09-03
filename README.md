@@ -5,7 +5,7 @@
 This guide will help you prepare DEM data using QGIS in order to render 3D looking shaded-relief maps in Blender.
 <br>
 
-<img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/renders/greece.jpg" width="70%">
+<img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/renders/greece.jpg" width="100%">
 
 ## Requirements
 For this tutorial i used the following software:  
@@ -25,7 +25,7 @@ I will be going through the whole process, using Wales as my area of interest.
 ### Step 1: Prepare the DEM <a name="1"></a>
 - First download the elevation tiles from your preferred source. I usually get mine from [here](https://ec.europa.eu/eurostat/web/gisco/geodata/reference-data/elevation/copernicus-dem/elevation). In this example I am using a tile which covers Wales.
 
-- If you need to merge multiple tiles together for your area of interest then use raster > miscellaneous > merge
+- If you need to merge multiple tiles together for your area of interest then use raster > miscellaneous > merge.
 
 - If you wish to clip the DEM to a specific area then in QGIS use raster > extraction > clip raster by mask layer and use a polygon of your area of interest as 'mask layer'. In this example I used a polygon of Wales to clip the DEM, both of them being the same projection (EPSG:4326).
 
@@ -38,9 +38,9 @@ Please bear in mind that this will take longer the first time you do it, but onc
 
 #### Scene settings
 
-- First delete the cube that is loaded by default (left click then delete key)
+- First delete the cube that is loaded by default (left click then delete key).
 
-- Then we need to add a plane. This is done by selecting add > mesh > plane 
+- Then we need to add a plane. This is done by selecting add > mesh > plane. 
 
 <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/addplane.png"> 
 
@@ -54,7 +54,7 @@ Please bear in mind that this will take longer the first time you do it, but onc
 
 <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/aspect.png">   
 
-- Just like this % value of the scene dimensions, we can increase and decrease the 'render' value in the 'render properties' tab to determine how many passes blender takes for each pixel (higher = more detailed, lower = less detailed)  
+- Just like this % value of the scene dimensions, we can increase and decrease the 'render' value in the 'render properties' tab to determine how many passes blender takes for each pixel (higher = more detailed, lower = less detailed).
 
 <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/rendervalue.png">   
 
@@ -71,20 +71,20 @@ I wont go into detail as to why I've chosen these values, but for a more in-dept
 
 Finally, we need to set our camera to how we want it. To do this, select the camera object in the object collection (top right) then set the following values:
 
-- In the object properties panel, set the location X and Y values to 0, and the Z to 3
+- In the object properties panel, set the location X and Y values to 0, and the Z to 3.
 
-- Then set the rotation X Y and Z to 0
+- Then set the rotation X Y and Z to 0.
 
 If the camera is too zoomed-in, adjust the focal length property (when using a perspective camera) or the orthographic scale (when using an orthographic camera). You can also adjust the Z position of the camera. For playing around with different camera angles I suggest switching to the '3D viewport' editor type and moving the camera by hand (see screenshot below). 
 
 <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/camera.png"> 
 
  ## Step 3 : Plug the DEM into the plane <a name="3"></a>
- - In order for the plane to use our DEM for elevation, we need to add a new material to our plane. To do this, select the plane in the object collections panel (top right), then change the editor mode to shader editor  
+ - In order for the plane to use our DEM for elevation, we need to add a new material to our plane. To do this, select the plane in the object collections panel (top right), then change the editor mode to shader editor.  
  
 <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/editortype.png"> 
 
- - Once in shader editor click 'new material' which should add two new nodes: a principled BSDF and a material output
+ - Once in shader editor click 'new material' which should add two new nodes: a principled BSDF and a material output.
 
  - All we need to do is add an image texture by clicking add > image texture. When the node appears, click the open image button and select the DEM .tif file we prepared earlier.
 
@@ -106,7 +106,7 @@ To change this lets add a modifier:
 
 - click the blue spanner icon to open modifier properties then click add modifier > subdivision surface. Now select 'simple' as the type of subdivision algorithm then tick 'adaptive subdivision'.
 
-Now press F12 to render again and you should ned up with something like this:
+Now press F12 to render again and you should end up with something like this:
 
 <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/render2.png"> 
 
@@ -115,11 +115,11 @@ Now press F12 to render again and you should ned up with something like this:
 
 In order to add colour we can add a colour ramp which will use our DEM to determine the colour of each pixel.
 
-- First add a colour ramp node with add > color ramp
+- First add a colour ramp node with add > color ramp.
 
 - Plug the DEM image texture node 'color' into the 'fac' of the color ramp node and then the 'color' of the color ramp node into the 'color' of the principled BSDF shader node.
 
-- Add color stops by using the '+' icon and click the color to open the color selector
+- Add color stops by using the '+' icon and click the color to open the color selector.
 
 <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/colorramp.png"> 
 
@@ -141,9 +141,9 @@ Step 1 : Rasterize vector polygon of AOI in QGIS (raster > conversion > rasteriz
 	output data type: byte
 
 
-Step 2: Save the generated raster as a rendered image (export > saveas > outputmode = rendered image)
+Step 2: Save the generated raster as a rendered image (export > saveas > outputmode = rendered image).
 
-Step 3 : Open output raster in infranView (or your prefferred image editor), save as png > select black area as transparent color. (this is just how I do it, as long as you can use the alpha channel of the image to distinguish between your AOI and areas outside it then thats fine)
+Step 3 : Open output raster in infranView (or your prefferred image editor), save as png > select black area as transparent color. (this is just how I do it, as long as you can use the alpha channel of the image to distinguish between your AOI and areas outside it then thats fine).
 
 Step 4 : Use in blender to differentiate AOI from non-AOI areas. Here is an example of using a different colour input for land and sea:
 
