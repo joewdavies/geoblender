@@ -143,7 +143,7 @@ Step 1 : Rasterize vector polygon of AOI in QGIS (raster > conversion > rasteriz
 
 Step 2: Save the generated raster as a rendered image (export > saveas > outputmode = rendered image).
 
-Step 3 : Open output raster in infranView (or your prefferred image editor), save as png > select black area as transparent color. (this is just how I do it, as long as you can use the alpha channel of the image to distinguish between your AOI and areas outside it then thats fine).
+Step 3 : Open output raster in irfranView (or your preferred image editor), save as png > select black area as transparent color. (this is just how I do it, as long as you can use the alpha channel of the image to distinguish between your AOI and areas outside it then thats fine).
 
 Step 4 : Use in blender to differentiate AOI from non-AOI areas. Here is an example of using a different colour input for land and sea:
 
