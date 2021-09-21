@@ -16,11 +16,15 @@ For this tutorial i used the following software:
 I will be going through the whole process, using Wales as my area of interest.
 
 ## Table of Contents
-1. [Prepare the DEM](#1)
-2. [Prepare blender scene](#2)
-3. [Plug the DEM into the plane](#3)
-4. [Add modifier](#4)
-5. [Add colour](#5)
+1. [Prepare the DEM](#1) 
+3. [Prepare blender scene](#2)
+	- [Scene settings](#2a) 	
+	- [Lighting settings](#2b) 
+	- [Camera settings](#2c) 
+5. [Plug the DEM into the plane](#3)
+6. [Add modifier](#4)
+7. [Add colour](#5)  
+8. [Add mask](#6) (optional)
 
 ### Step 1: Prepare the DEM <a name="1"></a>
 - First download the elevation tiles from your preferred source. I usually get mine from [here](https://ec.europa.eu/eurostat/web/gisco/geodata/reference-data/elevation/copernicus-dem/elevation). In this example I am using a tile which covers Wales.
@@ -36,7 +40,7 @@ I will be going through the whole process, using Wales as my area of interest.
  ## Step 2 : Prepare blender scene <a name="2"></a>
 Please bear in mind that this will take longer the first time you do it, but once it is set up you can just reuse the project as a template and adjust the dimensions to the different DEMs.
 
-#### Scene settings
+#### Scene settings <a name="2a"></a>
 
 - First delete the cube that is loaded by default (left click then delete key).
 
@@ -60,7 +64,7 @@ Please bear in mind that this will take longer the first time you do it, but onc
 
 - In the same tab, we must also set the render engine to 'cycles' and set 'feature set' to experimental. This enables blender to do its shaded-relief magic. If you have a powerful graphics card I reccommend chaning the 'device' to 'GPU compute' - that way renders will be much faster.
 
-#### Lighting settings 
+#### Lighting settings <a name="2b"></a>
 
 - We also need to configure the light source of our scene. We need to select sun as our light, so to do this left click the light object in the object collection (top right) then select the 'object data properties' panel then select sun, set the power to 6 and the angle to 90. 
 - If you want to exaggerate the shadows, change this angle from 90 to say 70 (or whatever you want!) just bear in mind that valleys will lose visibility as you reduce this value. 
@@ -69,7 +73,7 @@ Please bear in mind that this will take longer the first time you do it, but onc
 
 I wont go into detail as to why I've chosen these values, but for a more in-depth explanation on lighting shaded relief maps in blender [check out this tutorial](https://somethingaboutmaps.wordpress.com/blender-relief-tutorial-the-sun/). Feel free to play around with these values once we've done our first render.
 
-#### Camera settings
+#### Camera settings <a name="2c"></a>
 
 Finally, we need to set our camera to how we want it. To do this, select the camera object in the object collection (top right) then set the following values:
 
@@ -133,7 +137,7 @@ In order to add colour we can add a colour ramp which will use our DEM to determ
 
 Play around with the colours and their positions on the ramp to make cool renders.
 
-### Extra: Mask for AOI
+### Extra: Mask for AOI <a name="6"></a>
 
 If you are using a colour ramp with your DEM then you probably want to distinguish between features such as land and sea. This can be accomplished using a mask. Here I will briefly explain how I do this.
 
