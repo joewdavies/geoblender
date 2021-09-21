@@ -94,6 +94,11 @@ If the camera is too zoomed-in, adjust the focal length property (when using a p
  
 <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/shader1.png"> 
 
+- Finally, with the plane selected: go into the material properties > settings > surface and change displacement to 'displacement and bump'
+
+![image](https://user-images.githubusercontent.com/25485293/134147647-69a0c001-3d33-4ac0-abdd-9e366830f8d0.png)
+
+
  ## Step 4 : Add modifier <a name="4"></a>
 
  If you render the image now (render > render image or F12) you should get something like this:
