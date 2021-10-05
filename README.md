@@ -2,7 +2,10 @@
 
 ## Tutorial
 
-This guide will help you prepare DEM data using QGIS in order to render 3D looking shaded-relief maps in Blender.
+This guide will help you prepare DEM data using QGIS in order to render 3D looking shaded-relief maps in Blender. 
+
+Tweet me your finished maps, and feel free to ask any questions!   [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/joewdavies.svg?style=social&label=Follow%20%40joewdavies)](https://twitter.com/joewdavies)
+
 <br>
 
 <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/renders/greece.jpg" width="100%">
@@ -159,6 +162,8 @@ Step 3 : Open output raster in irfranView (or your preferred image editor), save
 Step 4 : Use in blender to differentiate AOI from non-AOI areas. Here is an example of using a different colour input for areas inside and outside the mask:
 
 <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/mask.png"> 
+
+Tip: you can also use this mask to artificially 'raise' your area of interest (as I did with the map of Greece). Just use a 'math' node connected to the DEM as the color1 input of a 'mix' node and color2 as the DEM, then use the mask as the Fac of the mix node. The result of this mix node is then plugged into the displacement node.
 
 
 
