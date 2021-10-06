@@ -34,7 +34,7 @@ I will be going through the whole process, using Wales as my area of interest.
 
 - If you need to merge multiple tiles together for your area of interest then use raster > miscellaneous > merge.
 
-- If you wish to clip the DEM to a specific area then in QGIS use raster > extraction > clip raster by mask layer and use a polygon of your area of interest as 'mask layer'. In this example I used a polygon of Wales to clip the DEM, both of them being the same projection (EPSG:4326).
+- If you wish to clip the DEM to a specific area then in QGIS use raster > extraction > clip raster by mask layer and use a polygon of your area of interest as 'mask layer'. In this example I used a [polygon of Wales](https://github.com/JoeWDavies/geoblender/blob/master/tutorial/AOI/Wales_EPSG4326.shp) to clip the DEM, both of them being the same projection (EPSG:4326).
 
 - Now reproject the DEM into your desired projection in QGIS using raster > projections > warp (reproject). In this example I am reprojecting to EPSG:27700 (British National Grid).
 
