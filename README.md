@@ -146,6 +146,7 @@ If you are using a colour ramp with your DEM then you probably want to distingui
 
 Step 1 : Rasterize vector polygon of AOI in QGIS (raster > conversion > rasterize) with the following options:
 	
+    input layer: your vector polygon
 	value to burn: 1
 	output units : pixels
 	width resolution : width of final DEM tif in pixels
