@@ -164,7 +164,7 @@ Step 4 : Use in blender to differentiate AOI from non-AOI areas. Here is an exam
 
 <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/mask.png"> 
 
-Tip: you can also use this mask to artificially 'raise' your area of interest (as I did with the map of Greece). Just use a 'math' node connected to the DEM as the color1 input of a 'mix' node and color2 as the DEM, then use the mask as the Fac of the mix node. The result of this mix node is then plugged into the displacement node.
+💡 **Tip:** you can also use this mask to artificially 'raise' your area of interest (as I did with the map of Greece). Just use a 'math' node connected to the DEM as the color1 input of a 'mix' node and color2 as the DEM, then use the mask as the Fac of the mix node. The result of this mix node is then plugged into the displacement node.
 
 
 
