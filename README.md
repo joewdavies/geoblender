@@ -72,6 +72,7 @@ Please bear in mind that this will take longer the first time you do it, but onc
 - We also need to configure the light source of our scene. We need to select sun as our light, so to do this left click the light object in the object collection (top right) then select the 'object data properties' panel then select sun, set the power to 6 and the angle to 90. 
 - If you want to exaggerate the shadows, change this angle from 90 to say 70 (or whatever you want!) just bear in mind that valleys will lose visibility as you reduce this value. 
 <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/light.png">   
+
 - Now open the object properties panel (orange square icon for me) and for rotation put 0 for X, 45 for Y, and 135 for Z.   
 
 I wont go into detail as to why I've chosen these values, but for a more in-depth explanation on lighting shaded relief maps in blender [check out this tutorial](https://somethingaboutmaps.wordpress.com/blender-relief-tutorial-the-sun/). Feel free to play around with these values once we've done our first render.
