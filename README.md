@@ -6,6 +6,7 @@ This guide will help you prepare DEM data using QGIS in order to render 3D looki
 
 Tweet me your finished maps, and feel free to ask any questions!   [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/joewdavies.svg?style=social&label=Follow%20%40joewdavies)](https://twitter.com/joewdavies)
 
+
 <br>
 
 <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/renders/greece.jpg" width="100%">
@@ -171,4 +172,8 @@ Step 4 : Use in blender to differentiate AOI from non-AOI areas. Here is an exam
 
 
 
+# End
+I hope you enjoyed the tutorial and you've managed to make a cool map!
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/joewdavies)
 
