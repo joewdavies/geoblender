@@ -31,7 +31,7 @@ I will be going through the whole process, using Wales as my area of interest.
 8. [Add mask](#6) (optional)
 
 ### Step 1: Prepare the DEM <a name="1"></a>
-- First download the elevation tiles from your preferred source. I usually get mine from [here](https://ec.europa.eu/eurostat/web/gisco/geodata/reference-data/elevation/copernicus-dem/elevation). In this example I am using a tile which covers Wales.
+- First download the elevation tiles from your preferred source. I usually get mine from [here](https://ec.europa.eu/eurostat/web/gisco/geodata/digital-elevation-model/copernicus). In this example I am using a tile which covers Wales.
 
 - If you need to merge multiple tiles together for your area of interest then use raster > miscellaneous > merge.
 
