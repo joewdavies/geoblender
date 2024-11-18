@@ -13,7 +13,7 @@ Tweet me your finished maps, and feel free to ask any questions!   [![Twitter UR
 
 ## Requirements
 For this tutorial i used the following software:  
-    - Blender 2.92  
+    - Blender 4.2.3 (I also previously used 2.92) 
     - QGIS 3.20
 
 
@@ -83,31 +83,43 @@ I wont go into detail as to why I've chosen these values, but for a more in-dept
 Finally, we need to set our camera to how we want it. To do this, select the camera object in the object collection (top right) then set the following values:
 
 - In the object properties panel, set the location X and Y values to 0, and the Z to 3.
-
+  
+ ![image](https://github.com/user-attachments/assets/f3ffa071-6732-46ae-aeaa-afe20b80cd95)
+  
 - Then set the rotation X Y and Z to 0.
+
+- Click the 'data' tab (green camera icon) and for Type select 'Orthographic', then adjust the 'Orthographic scale' setting according to the size of your plane. The idea is that the camera will see all of your plane.
+![image](https://github.com/user-attachments/assets/d68c21ca-eed1-4f02-b417-9b55b2c666a0)
+
+
 
 If the camera is too zoomed-in, adjust the focal length property (when using a perspective camera) or the orthographic scale (when using an orthographic camera). You can also adjust the Z position of the camera. For playing around with different camera angles I suggest switching to the '3D viewport' editor type and moving the camera by hand (see screenshot below). 
 
 <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/camera.png"> 
 
  ## Step 3 : Plug the DEM into the plane <a name="3"></a>
- - In order for the plane to use our DEM for elevation, we need to add a new material to our plane. To do this, select the plane in the object collections panel (top right), then change the editor mode to shader editor.  
+ - In order for the plane to use our DEM for elevation, we need to add a new material to our plane. To do this, select (left click) the plane in the object collections panel (top right), then change the editor mode to shader editor.  
  
 <img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/editortype.png"> 
 
  - Once in shader editor click 'new material' which should add two new nodes: a principled BSDF and a material output.
 
- - All we need to do is add an image texture by clicking add > image texture. When the node appears, click the open image button and select the DEM .tif file we prepared earlier.
+   ![image](https://github.com/user-attachments/assets/38f3a264-9d81-45c5-b64f-bfcf2ee7f063)
 
- - Now add a displacement node by selecting add > displacement.
+ - All we need to do is add an image texture by clicking add > texture > image texture. When the node appears, click the open image button and select the DEM .tif file we prepared earlier.
+
+   ![image](https://github.com/user-attachments/assets/8b2eaf29-0b95-4c99-83f1-2a218d22d1ef)
+
+ - Now add a displacement node by selecting add > vector > displacement.
 
  - Click the 'color' circle of the image texture node and drag to the 'height' circle of the displacement node. Then do the same but from 'displacement' of the displacement node to 'displacement' of the material output. It should now look something like this:
- 
-<img src="https://raw.githubusercontent.com/JoeWDavies/geoblender/master/tutorial/screenshots/shader1.png"> 
+   
+![image](https://github.com/user-attachments/assets/613ad79f-2895-4f8d-8a26-0b6eb8c3be3d)
 
-- Finally, with the plane selected: go into the material properties > settings > surface and change displacement to 'displacement and bump'
+- Finally, with the plane selected, in shader editor: click the options tab, then set displacement to to 'displacement and bump'
 
-![image](https://user-images.githubusercontent.com/25485293/134147647-69a0c001-3d33-4ac0-abdd-9e366830f8d0.png)
+![image](https://github.com/user-attachments/assets/caa5d069-d01e-4514-8d48-490c74111e8e)
+
 
 
  ## Step 4 : Add modifier <a name="4"></a>
