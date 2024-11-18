@@ -13,7 +13,7 @@ Tweet me your finished maps, and feel free to ask any questions!   [![Twitter UR
 
 ## Requirements
 For this tutorial i used the following software:  
-    - Blender 4.2.3 (I also previously used 2.92) 
+    - Blender 4.2.3 (I also previously used 2.92)  
     - QGIS 3.20
 
 
