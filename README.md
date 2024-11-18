@@ -68,6 +68,10 @@ Please bear in mind that this will take longer the first time you do it, but onc
 
 - In the same tab, we must also set the render engine to 'cycles' and set 'feature set' to experimental. This enables blender to do its shaded-relief magic. If you have a powerful graphics card I reccommend chaning the 'device' to 'GPU compute' - that way renders will be much faster.
 
+- Just a heads up: my GPU wasnt being used, so I had to go into edit > preferences > system and click OptiX (to enable my Nvidia GPU)
+  ![image](https://github.com/user-attachments/assets/206c94e6-d962-4f3b-bf74-6b8328a2f0b8)
+
+
 #### Lighting settings <a name="2b"></a>
 
 - We also need to configure the light source of our scene. We need to select sun as our light, so to do this left click the light object in the object collection (top right) then select the 'object data properties' panel then select sun, set the power to 6 and the angle to 90. 
