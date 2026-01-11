@@ -1,6 +1,6 @@
 # DEM preparation for Blender!
 
-Before starting the tutorial, if you want to get a DEM, mask, etc for a country, simply run DEM_prep.py with python installed!
+Before starting the [blender tutorial](https://github.com/joewdavies/geoblender/blob/master/README.md), if you want to get a DEM, mask, etc for a country, simply run DEM_prep.py with python installed!
 
 simply change `COUNTRY_CODE  = "CH"` in DEM_prep.py to your country of choice!
 
