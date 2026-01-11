@@ -5,6 +5,8 @@ from sentinel import download_sentinel_rgb, fit_to_sentinel_limit
 DEM-prep.py
 Full DEM preparation pipeline for GeoBlender
 
+I downloaded my tiles from https://ec.europa.eu/eurostat/web/gisco/geodata/digital-elevation-model/copernicus#Elevation
+
 Steps:
 1. Extract zipped DEM tiles
 2. Merge DEM tiles
@@ -17,8 +19,8 @@ Steps:
 # USER CONFIGURATION SETTINGS
 # ============================================================
 
-COUNTRY_CODE  = "CH"  # ISO 3166-1 alpha-2 country code
-DESIRED_EPSG = 2056   # output DEM projection (EPSG code)
+COUNTRY_CODE  = "KR"  # ISO 3166-1 alpha-2 country code
+DESIRED_EPSG = 5179   # output DEM projection (EPSG code)
 
 COUNTRIES_GPKG = "./input/CNTR_RG_01M_2024_4326.gpkg"
 AOI_OUTPUT = "./input/aoi/aoi.gpkg"
@@ -27,7 +29,6 @@ AOI_OUTPUT = "./input/aoi/aoi.gpkg"
 # INPUTS
 TILES_DIR = "./input/tiles"                 # Folder with DEM ZIP tiles
 EXTRACTED_TILES_DIR = "./input/tiles_tmp"   # Temp extraction folder
-aoi_path = "./input/aoi/aoi.gpkg"       # GeoPackage AOI
 AOI_LAYER = "aoi"                        # Layer name inside gpkg
 
 # OUTPUTS
@@ -67,6 +68,7 @@ import numpy as np
 import rasterio
 import geopandas as gpd
 import pandas as pd
+import shutil
 
 from pathlib import Path
 from rasterio.merge import merge
@@ -100,6 +102,9 @@ def create_aoi_from_country(
 # ------------------------------------------------------------
 
 def extract_dem_zips(tiles_dir: Path, extract_dir: Path) -> list[Path]:
+    # 🔥 Clear extract_dir on each run
+    if extract_dir.exists():
+        shutil.rmtree(extract_dir)
     extract_dir.mkdir(parents=True, exist_ok=True)
 
     zip_files = list(tiles_dir.glob("*.zip"))
