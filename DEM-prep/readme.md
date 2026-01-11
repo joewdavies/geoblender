@@ -1,6 +1,8 @@
 # DEM preparation for Blender!
 
-Before starting the [blender tutorial](https://github.com/joewdavies/geoblender/blob/master/README.md), if you want to get a DEM, mask, etc for a country, simply run DEM_prep.py with python installed!
+Before starting the [blender tutorial](https://github.com/joewdavies/geoblender/blob/master/README.md), if you want to get a DEM, mask, etc for a country, simply run DEM_prep.py with python installed and the DEM tiles added to the /input/tiles folder!
+
+I downloaded my tiles from https://ec.europa.eu/eurostat/web/gisco/geodata/digital-elevation-model/copernicus#Elevation
 
 simply change `COUNTRY_CODE  = "CH"` in DEM_prep.py to your country of choice!
 
