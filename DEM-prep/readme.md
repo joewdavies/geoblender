@@ -16,7 +16,7 @@ It will:
 - Download a Sentinel satellite image for your AOI (you must add your own copernicus tokens for this to a .env file)
   
 
-You can then use these files in blender (see automated.blend)
+You can then use these files in blender (see [automated.blend](https://github.com/joewdavies/geoblender/blob/master/DEM-prep/automated.blend))
 
 Like so:
 
