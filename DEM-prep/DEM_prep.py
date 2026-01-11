@@ -35,7 +35,7 @@ AOI_LAYER = "aoi"                        # Layer name inside gpkg
 OUTPUT_DIR = "./output"
 MERGED_DEM_NAME = "dem_merged.tif"
 CLIPPED_DEM_NAME = "dem_clipped.tif"
-RENDERED_DEM_NAME = "dem_rendered.png"
+RENDERED_DEM_NAME = "dem_rendered.tif"
 
 # MASK SETTINGS
 AOI_MASK_NAME = "aoi_mask.png"                  # Output AOI mask PNG
@@ -102,7 +102,7 @@ def create_aoi_from_country(
 # ------------------------------------------------------------
 
 def extract_dem_zips(tiles_dir: Path, extract_dir: Path) -> list[Path]:
-    # 🔥 Clear extract_dir on each run
+    # Clear extract_dir on each run
     if extract_dir.exists():
         shutil.rmtree(extract_dir)
     extract_dir.mkdir(parents=True, exist_ok=True)
@@ -365,6 +365,7 @@ def create_merged_water_mask(
     vector_paths: list[Path],
     out_png: Path
 ):
+    print(f"Creating merged water mask...")
     gdfs = [gpd.read_file(p) for p in vector_paths]
 
     with rasterio.open(dem_tif) as src:
@@ -407,7 +408,7 @@ def print_blender_dims(rendered_png: Path):
         height = src.height
 
     print("\n--- Blender setup info ---")
-    print(f"Rendered DEM dimensions: {width}px x {height}px")
+    print(f"Rendered DEM dimensions: {width} x {height}")
     print("Plane scale suggestion:")
     print(f"  X: {width / 1000:.3f}")
     print(f"  Y: {height / 1000:.3f}")
@@ -503,7 +504,7 @@ def main():
     
     export_rendered_dem_uint16(
         clipped_dem,
-        output_dir / "dem_displacement_16bit.tif"
+        output_dir / RENDERED_DEM_NAME
     )
 
     # AOI mask
@@ -514,26 +515,25 @@ def main():
     )
     
     # WATER MASK (LAKES + RIVERS)
-    lakes_shp = extract_vector_zip(
-        Path(WATER_LAKES_ZIP),
-        Path(WATER_EXTRACT_DIR),
-        WATER_LAKES_SHP
-    )
+    # lakes_shp = extract_vector_zip(
+    #     Path(WATER_LAKES_ZIP),
+    #     Path(WATER_EXTRACT_DIR),
+    #     WATER_LAKES_SHP
+    # )
 
-    rivers_shp = extract_vector_zip(
-        Path(WATER_RIVERS_ZIP),
-        Path(WATER_EXTRACT_DIR),
-        WATER_RIVERS_SHP
-    )
+    # rivers_shp = extract_vector_zip(
+    #     Path(WATER_RIVERS_ZIP),
+    #     Path(WATER_EXTRACT_DIR),
+    #     WATER_RIVERS_SHP
+    # )
 
-    create_merged_water_mask(
-        clipped_dem,
-        [lakes_shp, rivers_shp],
-        output_dir / WATER_MASK_NAME
-    )
+    # create_merged_water_mask(
+    #     clipped_dem,
+    #     [lakes_shp, rivers_shp],
+    #     output_dir / WATER_MASK_NAME
+    # )
     
     # SENTINEL ORTHOIMAGE
-
     # Read DEM size
     dem_width, dem_height = get_raster_size(clipped_dem)
 
