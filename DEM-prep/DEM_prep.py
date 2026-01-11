@@ -50,9 +50,9 @@ WATER_EXTRACT_DIR = "./input/water/tmp"
 WATER_MASK_NAME = "water_mask.png"
 
 #SENTINEL SETTINGS
-SENTINEL_RGB = "./output/sentinel_rgb.tif"
-SENTINEL_MAX_CLOUD = 15  # Max cloud cover percentage for Sentinel image
-SENTINEL_TIME_RANGE = ("2024-07-01", "2024-09-15") # Time range for Sentinel image
+SENTINEL_RGB = "./output/sentinel/sentinel_rgb.tif"
+SENTINEL_MAX_CLOUD = 5  # Max cloud cover percentage for Sentinel image
+SENTINEL_TIME_RANGE = ("2023-07-01", "2023-09-15") # Time range for Sentinel image
 
 # OUTPUT SETTINGS
 PERCENTILE_CLIP = (0.1, 99.9)  # A percentile stretch is a way of converting raw DEM values (meters) into a 0–255 grayscale image by ignoring extreme values at the low and high ends.
@@ -486,7 +486,7 @@ def main():
 
     print(f"Requesting Sentinel RGB at {dem_width} x {dem_height}px...")
 
-    sentinel_out = Path("./output/sentinel/sentinel_rgb.tif")
+    sentinel_out = Path(SENTINEL_RGB)
     sentinel_out.parent.mkdir(parents=True, exist_ok=True)
 
     download_sentinel_rgb(
@@ -500,7 +500,7 @@ def main():
 
 
     # Optional but recommended: resample to DEM grid (guarantees alignment)
-    sentinel_draped = output_dir / "sentinel_draped.tif"
+    sentinel_draped = output_dir / "sentinel/sentinel_draped.tif"
 
     resample_raster_to_dem(
         sentinel_out,
