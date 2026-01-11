@@ -149,7 +149,7 @@ def download_sentinel_rgb(
                         "maxCloudCoverage": max_cloud,
                     },
                     "processing": {
-                        "mosaickingOrder": "leastCC"
+                        "mosaickingOrder": "mostRecent"
                     }
                 }
             ],

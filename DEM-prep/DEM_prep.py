@@ -17,7 +17,7 @@ Steps:
 # USER CONFIGURATION SETTINGS
 # ============================================================
 
-COUNTRY_CODE  = "CH"              # ISO 3166-1 alpha-2 country code
+COUNTRY_CODE  = "CH"  # ISO 3166-1 alpha-2 country code
 DESIRED_EPSG = 2056   # output DEM projection (EPSG code)
 
 COUNTRIES_GPKG = "./input/CNTR_RG_01M_2024_4326.gpkg"
@@ -51,8 +51,8 @@ WATER_MASK_NAME = "water_mask.png"
 
 #SENTINEL SETTINGS
 SENTINEL_RGB = "./output/sentinel_rgb.tif"
-SENTINEL_MAX_CLOUD = 5  # Max cloud cover percentage for Sentinel image
-SENTINEL_TIME_RANGE = ("2019-07-01", "2024-09-15") # Time range for Sentinel image
+SENTINEL_MAX_CLOUD = 15  # Max cloud cover percentage for Sentinel image
+SENTINEL_TIME_RANGE = ("2024-07-01", "2024-09-15") # Time range for Sentinel image
 
 # OUTPUT SETTINGS
 PERCENTILE_CLIP = (0.1, 99.9)  # A percentile stretch is a way of converting raw DEM values (meters) into a 0–255 grayscale image by ignoring extreme values at the low and high ends.
