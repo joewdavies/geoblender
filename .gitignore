@@ -1,0 +1,6 @@
+# Ignore everything inside these folders
+tiles/
+tiles_tmp/
+output/
+.env
+__pycache__/
