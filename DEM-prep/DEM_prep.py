@@ -255,7 +255,53 @@ def export_rendered_dem(dem_tif: Path, out_png: Path, percentile_clip):
 
     print(f"[✓] Rendered DEM → {out_png.name}")
     print(f"    stretch: {vmin:.2f} → {vmax:.2f}")
- 
+
+def export_rendered_dem_uint16(
+    dem_tif: Path,
+    out_tif: Path,
+    percentile_clip=None
+):
+    """
+    Export DEM as 16-bit unsigned integer (0–65535),
+    rescaled from existing elevation values.
+    """
+
+    with rasterio.open(dem_tif) as src:
+        dem = src.read(1).astype("float32")
+        profile = src.profile.copy()
+        nodata = src.nodata
+
+    # Mask NoData
+    if nodata is not None:
+        dem = np.where(dem == nodata, np.nan, dem)
+
+    # Optional percentile clip (usually OFF for displacement)
+    if percentile_clip:
+        vmin, vmax = np.nanpercentile(dem, percentile_clip)
+    else:
+        vmin = np.nanmin(dem)
+        vmax = np.nanmax(dem)
+
+    if vmin == vmax:
+        raise RuntimeError("DEM has zero elevation range")
+
+    # Rescale to 0–65535
+    dem_norm = (dem - vmin) / (vmax - vmin)
+    dem_uint16 = np.clip(dem_norm * 65535, 0, 65535).astype(np.uint16)
+
+    profile.update(
+        driver="GTiff",
+        dtype="uint16",
+        count=1,
+        nodata=0
+    )
+
+    with rasterio.open(out_tif, "w", **profile) as dst:
+        dst.write(dem_uint16, 1)
+
+    print(f"[✓] 16-bit DEM written → {out_tif.name}")
+    print(f"    value range: {vmin:.2f} → {vmax:.2f}")
+    
 # ------------------------------------------------------------
 # CREATE MASK (ALPHA PNG)
 # ------------------------------------------------------------
@@ -444,10 +490,15 @@ def main():
         clipped_dem
     )
 
-    export_rendered_dem(
+    # export_rendered_dem(
+    #     clipped_dem,
+    #     output_dir / RENDERED_DEM_NAME,
+    #     PERCENTILE_CLIP
+    # )
+    
+    export_rendered_dem_uint16(
         clipped_dem,
-        output_dir / RENDERED_DEM_NAME,
-        PERCENTILE_CLIP
+        output_dir / "dem_displacement_16bit.tif"
     )
 
     # AOI mask
