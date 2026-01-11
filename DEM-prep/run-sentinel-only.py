@@ -1,4 +1,4 @@
-from sentinel_simple import download_sentinel_rgb
+from sentinel import download_sentinel_rgb
 
 download_sentinel_rgb(
     aoi_gpkg="./input/aoi/aoi.gpkg",

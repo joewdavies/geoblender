@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from sentinel import download_sentinel_rgb
+from sentinel import download_sentinel_rgb, fit_to_sentinel_limit
 
 """
 DEM-prep.py
@@ -18,14 +18,17 @@ Steps:
 # ============================================================
 
 COUNTRY_CODE  = "CH"              # ISO 3166-1 alpha-2 country code
+DESIRED_EPSG = 2056   # output DEM projection (EPSG code)
+
 COUNTRIES_GPKG = "./input/CNTR_RG_01M_2024_4326.gpkg"
 AOI_OUTPUT = "./input/aoi/aoi.gpkg"
+
 
 # INPUTS
 TILES_DIR = "./input/tiles"                 # Folder with DEM ZIP tiles
 EXTRACTED_TILES_DIR = "./input/tiles_tmp"   # Temp extraction folder
 aoi_path = "./input/aoi/aoi.gpkg"       # GeoPackage AOI
-AOI_LAYER = None                        # Layer name inside gpkg
+AOI_LAYER = "aoi"                        # Layer name inside gpkg
 
 # OUTPUTS
 OUTPUT_DIR = "./output"
@@ -48,12 +51,12 @@ WATER_MASK_NAME = "water_mask.png"
 
 #SENTINEL SETTINGS
 SENTINEL_RGB = "./output/sentinel_rgb.tif"
-SENTINEL_CLIENT_ID = "YOUR_CLIENT_ID"
-SENTINEL_CLIENT_SECRET = "YOUR_CLIENT_SECRET"
+SENTINEL_MAX_CLOUD = 5  # Max cloud cover percentage for Sentinel image
+SENTINEL_TIME_RANGE = ("2019-07-01", "2024-09-15") # Time range for Sentinel image
 
 # OUTPUT SETTINGS
 PERCENTILE_CLIP = (0.1, 99.9)  # A percentile stretch is a way of converting raw DEM values (meters) into a 0–255 grayscale image by ignoring extreme values at the low and high ends.
-DESIRED_EPSG = 2056   # output DEM projection (EPSG code)
+
 
 # ============================================================
 
@@ -104,7 +107,7 @@ def extract_dem_zips(tiles_dir: Path, extract_dir: Path) -> list[Path]:
         sys.exit(f"[✗] No DEM ZIP files found in {tiles_dir}")
 
     for zip_path in zip_files:
-        print(f"[i] Extracting {zip_path.name}")
+        print(f"Extracting {zip_path.name}...")
         with zipfile.ZipFile(zip_path, "r") as z:
             z.extractall(extract_dir)
 
@@ -152,6 +155,7 @@ def reproject_dem(
     dst_epsg: int
 ) -> Path:
     dst_crs = f"EPSG:{dst_epsg}"
+    print(f"Reprojecting DEM to EPSG:{dst_epsg}...")
 
     with rasterio.open(dem_tif) as src:
         transform, width, height = calculate_default_transform(
@@ -262,7 +266,7 @@ def create_vector_mask(
     out_png: Path,
     burn_value: int = 255
 ):
-    gdf = gpd.read_file(vector_path)
+    gdf = gpd.read_file(vector_path, layer=AOI_LAYER)
 
     with rasterio.open(dem_tif) as src:
         gdf = gdf.to_crs(src.crs)
@@ -295,7 +299,7 @@ def create_vector_mask(
 def extract_vector_zip(zip_path: Path, extract_dir: Path, shp_name: str) -> Path:
     extract_dir.mkdir(parents=True, exist_ok=True)
 
-    print(f"[i] Extracting {zip_path.name}")
+    print(f"Extracting {zip_path.name}...")
     with zipfile.ZipFile(zip_path, "r") as z:
         z.extractall(extract_dir)
 
@@ -397,13 +401,10 @@ def resample_raster_to_dem(
 
     print(f"[✓] Sentinel resampled to DEM grid → {out_tif.name}")
     
-def find_sentinel_tif(folder: Path) -> Path:
-    tifs = list(folder.glob("*.tif")) + list(folder.glob("*.tiff"))
-    if not tifs:
-        sys.exit(f"[✗] No Sentinel TIFF found in {folder}")
-    if len(tifs) > 1:
-        print("[i] Multiple Sentinel TIFFs found, using first one")
-    return tifs[0]
+
+def get_raster_size(raster_path: Path) -> tuple[int, int]:
+    with rasterio.open(raster_path) as src:
+        return src.width, src.height
     
 # ------------------------------------------------------------
 # MAIN
@@ -475,31 +476,39 @@ def main():
         output_dir / WATER_MASK_NAME
     )
     
-    # ------------------------------------------------------------
     # SENTINEL ORTHOIMAGE
-    # ------------------------------------------------------------
 
-    sentinel_raw_dir = Path("./output/sentinel_raw")
-    sentinel_raw_dir.mkdir(parents=True, exist_ok=True)
+    # Read DEM size
+    dem_width, dem_height = get_raster_size(clipped_dem)
+
+    # Sentinel Hub pixel limit
+    dem_width, dem_height = fit_to_sentinel_limit(dem_width, dem_height)
+
+    print(f"Requesting Sentinel RGB at {dem_width} x {dem_height}px...")
+
+    sentinel_out = Path("./output/sentinel/sentinel_rgb.tif")
+    sentinel_out.parent.mkdir(parents=True, exist_ok=True)
 
     download_sentinel_rgb(
-        aoi_path,
-        out_dir=sentinel_raw_dir,
-        time_range=("2024-06-01", "2024-08-01"),
-        max_cloud=20,
-        size=(1024, 1024)
+        aoi_gpkg=AOI_OUTPUT,
+        out_tif=str(sentinel_out),
+        max_cloud=SENTINEL_MAX_CLOUD,
+        time_range=SENTINEL_TIME_RANGE,
+        width=dem_width,
+        height=dem_height,
     )
 
-    sentinel_raw = find_sentinel_tif(sentinel_raw_dir)
 
+    # Optional but recommended: resample to DEM grid (guarantees alignment)
     sentinel_draped = output_dir / "sentinel_draped.tif"
 
     resample_raster_to_dem(
-        sentinel_raw,
+        sentinel_out,
         clipped_dem,
         sentinel_draped
     )
 
+    # PRINT BLENDER DIMENSIONS
     print_blender_dims(output_dir / RENDERED_DEM_NAME)
 
 
